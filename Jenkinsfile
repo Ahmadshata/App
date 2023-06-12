@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'deploy'
                 script {
-                       
+                        withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                             sh '''
                                 export BUILD_NUMBER=$(cat ../build.txt)
                                 export check=$(helm list | grep "my-release")
@@ -32,7 +32,7 @@ pipeline {
                                 fi
 
                             '''
-         
+                        }
                     }
             }
         }
