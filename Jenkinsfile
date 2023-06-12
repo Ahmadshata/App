@@ -24,7 +24,7 @@ pipeline {
                             sh '''
                                 PATH=/home/jenkins/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
                                 export BUILD_NUMBER=$(cat ../build.txt)
-                                export check=$(helm list | grep "my-app-release")
+                                export check=$(helm list --short | grep "my-app-release")
                                 if [ -z $check ]
                                 then
                                     helm install my-app-release ./my-chart/  --set image.tag=v${BUILD_NUMBER}
