@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-portfolio
+  namespace: portfolio
+  labels:
+    {{- include "mylabels" . }}  
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      app: portfolio
+  template:
+    metadata:
+      labels:
+        app: portfolio
+    spec:
+      containers:
+{{- with .Values.image }}
+{{- if .tag }}
+      - image: {{ .repository }}/{{ .name }}:{{ .tag}}
+{{- else }}
+      - image: {{ .repository }}/{{ .name }}:v8
+{{- end }}
+{{- end }}
+        name: portfolio
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 80
+        resources: {}

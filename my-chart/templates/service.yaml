@@ -1,0 +1,19 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-myservice
+  namespace: portfolio
+  labels:
+    {{- include "mylabels" . }}  
+spec:
+  ports:
+  - name: portfolioport
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: portfolio
+  type: {{ .Values.service.type }}
+status:
+  loadBalancer: {}

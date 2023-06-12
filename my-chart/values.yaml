@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: ahmadesmailshata
+  name: portfolio
+  tag: ""
+  pullPolicy: IfNotPresent
+
+labels:
+  app: portfolio
+  env: prod
+
+service:
+  type: LoadBalancer
+
