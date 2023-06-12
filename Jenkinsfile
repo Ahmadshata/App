@@ -26,9 +26,9 @@ pipeline {
                                 export check=$(helm list | grep "my-release")
                                 if [ -z $check ]
                                 then
-                                    helm install my-release ./my-chart/ --values ./my-chart/dev-values.yaml --set image.tag=${BUILD_NUMBER}
+                                    helm install my-release ./my-chart/  --set image.tag=${BUILD_NUMBER}
                                 else
-                                    helm upgrade my-release ./my-chart/ --values ./my-chart/dev-values.yaml --set image.tag=${BUILD_NUMBER}
+                                    helm upgrade my-release ./my-chart/  --set image.tag=${BUILD_NUMBER}
                                 fi
 
                             '''
